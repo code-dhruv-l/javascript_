@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Memory Card Game</title>
+    <style>
+        .card {
+            width: 100px;
+            height: 100px;
+            display: inline-block;
+            margin: 10px;
+            background-color: #cccccc;
+            cursor: pointer;
+        }
+        .flipped {
+            background-color: #ffcc00;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-board">
+        <!-- Cards will be generated here -->
+    </div>
+    <script>
+        const cards = [1, 1, 2, 2, 3, 3, 4, 4];
+        let flippedCards = [];
+
+        // Shuffle cards
+        cards.sort(() => 0.5 - Math.random());
+
+        const gameBoard = document.getElementById('game-board');
+        cards.forEach((cardValue, index) => {
+            const card = document.createElement('div');
+            card.classList.add('card');
+            card.dataset.value = cardValue;
+            card.addEventListener('click', () => flipCard(card));
+            gameBoard.appendChild(card);
+        });
+
+        function flipCard(card) {
+            card.classList.add('flipped');
+            card.textContent = card.dataset.value;
+            flippedCards.push(card);
+
+            if (flippedCards.length === 2) {
+                setTimeout(checkForMatch, 1000);
+            }
+        }
+
+        function checkForMatch() {
+            const [card1, card2] = flippedCards;
+            if (card1.dataset.value !== card2.dataset.value) {
+                card1.classList.remove('flipped');
+                card2.classList.remove('flipped');
+                card1.textContent = '';
+                card2.textContent = '';
+            }
+            flippedCards = [];
+        }
+    </script>
+</body>
+</html>

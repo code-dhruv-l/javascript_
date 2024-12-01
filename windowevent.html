@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Window Event</title>
+</head>
+<body>
+    <button onclick="OpenWindow()">Open Window</button>
+    <button onclick="CloseWindow()">Close Window</button>
+
+    <script>
+        var mywindown;
+        function OpenWindow(){
+            mywindown=window.open("https:www.google.com"," ","height=500px,width=500px,left=200px,top=200px");   //use _parent when you need to open in same tab not new tab For new tab by defualt is _blan
+                                                                                        //you can modify size of window
+        }
+
+        function CloseWindow(){
+            mywindown.close();  
+        }
+    </script>
+</body>
+</html>
